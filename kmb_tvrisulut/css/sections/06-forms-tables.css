@@ -1,0 +1,222 @@
+﻿/* 06 - Shared Forms, Tables & Badges (Enhanced) */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.form-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-actions {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th,
+td {
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 14px;
+    transition: background-color var(--transition-fast);
+}
+
+th {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    color: var(--text-secondary);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border-bottom: 2px solid var(--border);
+}
+
+tr:hover td {
+    background: rgba(59, 130, 246, 0.03);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td {
+    color: var(--text-primary);
+}
+
+td a {
+    margin-right: 8px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+td a:hover {
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+td a[onclick]:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: #dc2626;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    border: 1px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.status-badge:hover {
+    transform: scale(1.05);
+}
+
+.status-ide {
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    color: #1d4ed8;
+    border-color: #93c5fd;
+}
+
+.status-proses {
+    background: linear-gradient(135deg, #fef3c7, #fffbeb);
+    color: #92400e;
+    border-color: #fcd34d;
+}
+
+.status-siap-tayang {
+    background: linear-gradient(135deg, #dcfce7, #f0fdf4);
+    color: #166534;
+    border-color: #86efac;
+}
+
+.status-selesai {
+    background: linear-gradient(135deg, #ede9fe, #f5f3ff);
+    color: #5b21b6;
+    border-color: #c4b5fd;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Export Report Panel */
+.export-report-panel {
+    border: 1px solid rgba(142, 201, 255, 0.35);
+    background: linear-gradient(135deg, rgba(209, 232, 252, 0.80), rgba(189, 224, 254, 0.70));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.export-report-panel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -25%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.06), transparent 70%);
+    pointer-events: none;
+}
+
+.export-report-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.export-report-head h2 {
+    margin-bottom: 0;
+}
+
+.export-report-head p {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.export-report-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+}
+
+.export-btn {
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary), #2563eb);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+    transition: all var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.export-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.5s ease;
+}
+
+.export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+}
+
+.export-btn:hover::after {
+    left: 100%;
+}

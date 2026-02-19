@@ -1,0 +1,322 @@
+﻿/* 01 - Base & Global Variables + Animations */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* ===== New Palette ===== */
+    --alice-blue: #A7C2DD;
+    --columbia-blue: #8FB1D2;
+    --uranian-blue: #769FC6;
+    --sky-blue: #1F4A78;
+    --maya-blue: #2A5F93;
+
+    /* ===== Semantic Tokens ===== */
+    --bg-base: var(--alice-blue);
+    --bg-section: var(--columbia-blue);
+    --bg-card: var(--uranian-blue);
+    --btn-primary: var(--sky-blue);
+    --btn-hover: var(--maya-blue);
+
+    /* ===== Text (dark for contrast) ===== */
+    --text-primary: #1B2A4A;
+    --text-secondary: #2D4A6F;
+    --text-muted: #4A6D8C;
+    --text-on-btn: #F2F8FF;
+
+    /* ===== Sidebar ===== */
+    --sidebar-width: 260px;
+    --sidebar-bg: linear-gradient(180deg, #0A1F38 0%, #08192D 50%, #051221 100%);
+    --sidebar-text: #E5F0FA;
+
+    /* ===== Borders ===== */
+    --border: rgba(42, 95, 147, 0.46);
+    --border-light: rgba(31, 74, 120, 0.28);
+
+    /* ===== Shadows (soft & modern) ===== */
+    --shadow-sm: 0 1px 3px rgba(27, 58, 92, 0.06), 0 1px 2px rgba(27, 58, 92, 0.04);
+    --shadow-md: 0 4px 14px rgba(27, 58, 92, 0.08), 0 2px 6px rgba(27, 58, 92, 0.05);
+    --shadow-lg: 0 12px 36px rgba(27, 58, 92, 0.10), 0 4px 12px rgba(27, 58, 92, 0.06);
+    --shadow-xl: 0 24px 56px rgba(27, 58, 92, 0.12), 0 8px 20px rgba(27, 58, 92, 0.08);
+    --shadow-glow: 0 0 24px rgba(142, 201, 255, 0.25);
+
+    /* ===== Radii ===== */
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-full: 999px;
+
+    /* ===== Transitions ===== */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ===== Legacy aliases (keep CSS references working) ===== */
+    --primary: #2F5E8E;
+    --primary-dark: #0E2746;
+    --primary-light: var(--sky-blue);
+    --accent: var(--maya-blue);
+    --accent-light: var(--uranian-blue);
+    --surface: var(--bg-card);
+    --surface-hover: var(--btn-hover);
+    --base-blue-soft: var(--alice-blue);
+    --base-blue-modern: var(--columbia-blue);
+    --base-orange-pastel: var(--uranian-blue);
+    --base-orange-light: var(--columbia-blue);
+    --color-primary: #1B3A5C;
+    --color-secondary: #2D4A6F;
+    --color-accent: var(--sky-blue);
+    --color-highlight: var(--maya-blue);
+    --color-surface: var(--alice-blue);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+}
+
+body:not(.login-body)::before {
+    content: '';
+    position: fixed;
+    inset: -120px;
+    pointer-events: none;
+    z-index: -2;
+    background:
+        radial-gradient(ellipse at 15% 20%, rgba(162, 210, 255, 0.30) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 80%, rgba(142, 201, 255, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(189, 224, 254, 0.40) 0%, transparent 60%);
+    filter: blur(50px);
+    animation: bgPulse 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.04); }
+}
+
+.dashboard-body {
+    background: linear-gradient(160deg, var(--alice-blue) 0%, var(--columbia-blue) 40%, var(--uranian-blue) 100%);
+    min-height: 100vh;
+}
+
+::selection {
+    background: rgba(142, 201, 255, 0.40);
+    color: var(--text-primary);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(142, 201, 255, 0.45);
+    border-radius: var(--radius-full);
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(142, 201, 255, 0.70);
+    background-clip: content-box;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+input,
+select {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--surface);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+    outline: none;
+}
+
+input:hover,
+select:hover {
+    border-color: var(--sky-blue);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--maya-blue);
+    box-shadow: 0 0 0 3px rgba(142, 201, 255, 0.30), var(--shadow-sm);
+    background: #ffffff;
+}
+
+input::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+button,
+.btn-secondary {
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 11px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.3px;
+}
+
+button {
+    background: linear-gradient(135deg, var(--sky-blue) 0%, var(--maya-blue) 100%);
+    color: var(--text-on-btn);
+    margin-top: 8px;
+    box-shadow: 0 4px 14px rgba(142, 201, 255, 0.35);
+}
+
+button:hover {
+    background: linear-gradient(135deg, var(--maya-blue) 0%, #7AC0FF 100%);
+    box-shadow: 0 6px 22px rgba(142, 201, 255, 0.50);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(142, 201, 255, 0.30);
+}
+
+.btn-secondary {
+    background: var(--border-light);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--border);
+    border-color: rgba(68, 116, 163, 0.6);
+    transform: translateY(-1px);
+}
+
+.alert {
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: alertSlideIn 0.4s ease both;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.alert::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+.alert.success {
+    background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
+    color: #166534;
+    border-color: #86efac;
+}
+
+.alert.success::before {
+    background: #22c55e;
+}
+
+.alert.error {
+    background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%);
+    color: #991b1b;
+    border-color: #fca5a5;
+}
+
+.alert.error::before {
+    background: #ef4444;
+}
+
+@keyframes alertSlideIn {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+small {
+    display: block;
+    margin-top: 12px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* ===== Global Animation Keyframes ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
